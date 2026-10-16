@@ -32,7 +32,7 @@ def sanitize_input_output(explanation_method: Callable):
     def sanitize(
         self,
         inputs: Union[tf.data.Dataset, tf.Tensor, np.array],
-        targets: Optional[Union[tf.Tensor, np.array]],
+        targets: Optional[Union[tf.Tensor, np.array]] = None,
         *args,
         **kwargs,
     ):
@@ -121,7 +121,7 @@ class BlackBoxExplainer(ABC):
         """
         raise NotImplementedError()
 
-    def __call__(self, inputs: tf.Tensor, labels: tf.Tensor) -> tf.Tensor:
+    def __call__(self, inputs: tf.Tensor, labels: Optional[tf.Tensor] = None) -> tf.Tensor:
         """Explain alias"""
         return self.explain(inputs, labels)
 
